@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { 
   Carousel,
   CarouselContent,
@@ -46,6 +46,10 @@ const testimonials = [
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const handleCarouselSelect = useCallback((index: number) => {
+    setActiveIndex(index);
+  }, []);
+
   return (
     <section id="testimonials" className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,8 +69,10 @@ export function TestimonialsSection() {
               loop: true,
             }}
             onSelect={(api) => {
-              const selectedIndex = api.selectedScrollSnap();
-              setActiveIndex(selectedIndex);
+              if (api && api.selectedScrollSnap) {
+                const selectedIndex = api.selectedScrollSnap();
+                handleCarouselSelect(selectedIndex);
+              }
             }}
             className="w-full"
           >
@@ -109,7 +115,7 @@ export function TestimonialsSection() {
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => handleCarouselSelect(index)}
                 className={`w-2.5 h-2.5 rounded-full mx-1 transition-colors ${
                   activeIndex === index 
                     ? "bg-techtribe-red" 
