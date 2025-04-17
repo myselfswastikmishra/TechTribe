@@ -64,7 +64,10 @@ export function TestimonialsSection() {
               align: "center",
               loop: true,
             }}
-            onSelect={(index) => setActiveIndex(index)}
+            onSelect={(api) => {
+              const selectedIndex = api.selectedScrollSnap();
+              setActiveIndex(selectedIndex);
+            }}
             className="w-full"
           >
             <CarouselContent>
