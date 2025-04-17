@@ -1,11 +1,12 @@
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { 
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious 
+  CarouselPrevious,
+  type CarouselApi
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { QuoteIcon } from "lucide-react";
@@ -45,10 +46,29 @@ const testimonials = [
 
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
 
   const handleCarouselSelect = useCallback((index: number) => {
     setActiveIndex(index);
   }, []);
+
+  // Update the active index when the carousel changes
+  useCallback(() => {
+    if (!carouselApi) return;
+
+    const handleSelect = () => {
+      setActiveIndex(carouselApi.selectedScrollSnap());
+    };
+
+    carouselApi.on("select", handleSelect);
+    
+    // Set initial index
+    handleSelect();
+
+    return () => {
+      carouselApi.off("select", handleSelect);
+    };
+  }, [carouselApi]);
 
   return (
     <section id="testimonials" className="py-16 md:py-24">
@@ -68,12 +88,7 @@ export function TestimonialsSection() {
               align: "center",
               loop: true,
             }}
-            onSelect={(api) => {
-              if (api && api.selectedScrollSnap) {
-                const selectedIndex = api.selectedScrollSnap();
-                handleCarouselSelect(selectedIndex);
-              }
-            }}
+            setApi={setCarouselApi}
             className="w-full"
           >
             <CarouselContent>
@@ -115,7 +130,10 @@ export function TestimonialsSection() {
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => handleCarouselSelect(index)}
+                onClick={() => {
+                  handleCarouselSelect(index);
+                  carouselApi?.scrollTo(index);
+                }}
                 className={`w-2.5 h-2.5 rounded-full mx-1 transition-colors ${
                   activeIndex === index 
                     ? "bg-techtribe-red" 
