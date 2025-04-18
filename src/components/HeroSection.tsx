@@ -45,15 +45,38 @@ export function HeroSection() {
         </div>
         
         <div className="mt-16 md:mt-24 overflow-hidden py-4">
-          <div className="flex space-x-8 animate-marquee">
-            {['Python', 'JavaScript', 'React', 'AI', 'Machine Learning', 'Cloud Computing', 'Web3', 'Blockchain', 'Data Science', 'IoT', 'Cybersecurity'].map((tech) => (
-              <span key={tech} className="text-lg text-gray-500 dark:text-gray-400 whitespace-nowrap">
+          {/* First marquee - moving from right to left */}
+          <div className="flex space-x-8 animate-marquee-infinite">
+            {['Cloud Computing', 'Web3', 'Blockchain', 'Data Science', 'IoT', 'Cybersecurity',
+              'Cloud Computing', 'Web3', 'Blockchain', 'Data Science', 'IoT', 'Cybersecurity'].map((tech, index) => (
+              <span 
+                key={`${tech}-${index}`} 
+                className="text-lg text-gray-500 dark:text-gray-400 whitespace-nowrap px-4 font-medium"
+              >
                 {tech}
               </span>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Add this style block for the infinite animation */}
+      <style jsx>{`
+        @keyframes marqueeInfinite {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-marquee-infinite {
+          display: flex;
+          animation: marqueeInfinite 20s linear infinite;
+          min-width: 100%;
+        }
+      `}</style>
     </section>
   );
 }
