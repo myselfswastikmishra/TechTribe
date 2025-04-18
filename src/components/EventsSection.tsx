@@ -144,7 +144,7 @@ export function EventsSection() {
                   <SelectValue placeholder="Event Type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Types</SelectItem>
+                  <SelectItem value="all">All Types</SelectItem>
                   <SelectItem value="Workshop">Workshop</SelectItem>
                   <SelectItem value="Hackathon">Hackathon</SelectItem>
                   <SelectItem value="Networking">Networking</SelectItem>
