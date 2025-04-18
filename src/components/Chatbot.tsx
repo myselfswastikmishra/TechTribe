@@ -37,7 +37,7 @@ export function Chatbot() {
   const generateChatResponse = async (prompt: string) => {
     try {
       const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + API_KEY,
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + API_KEY,
         {
           method: "POST",
           headers: {
@@ -73,6 +73,11 @@ export function Chatbot() {
       );
 
       const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(data.error.message || 'Failed to generate response');
+      }
+      
       return data.candidates[0].content.parts[0].text;
     } catch (error) {
       console.error("Error generating response:", error);
