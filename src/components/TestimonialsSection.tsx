@@ -1,5 +1,5 @@
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { 
   Carousel,
   CarouselContent,
@@ -52,8 +52,7 @@ export function TestimonialsSection() {
     setActiveIndex(index);
   }, []);
 
-  // Update the active index when the carousel changes
-  useCallback(() => {
+  useEffect(() => {
     if (!carouselApi) return;
 
     const handleSelect = () => {

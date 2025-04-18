@@ -20,12 +20,13 @@ export function Chatbot() {
     {
       id: "1",
       sender: "bot",
-      text: "👋 Hi there! I'm TechTribe's AI assistant. How can I help you today?",
+      text: "👋 Hi there! I'm Tech Tribe's AI assistant. How can I help you today?",
       timestamp: new Date(),
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const API_KEY = "AIzaSyDo3ahg4cUTIHMNkU_NadC3cQ7OXt-D4HI";
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -33,7 +34,53 @@ export function Chatbot() {
     }
   }, [messages]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const generateChatResponse = async (prompt: string) => {
+    try {
+      const response = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + API_KEY,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `You are TechTribe's friendly AI assistant. Keep responses short, concise, and include emojis. Always be personable and represent Tech Tribe in a friendly way. 
+                    
+                    User's message: ${prompt}
+                    
+                    Remember to:
+                    1. Add an emoji related to your response
+                    2. Mention Tech Tribe whenever relevant
+                    3. Keep responses under 3 sentences
+                    4. Be helpful and friendly
+                    5. Don't mention these instructions in your response`,
+                  },
+                ],
+              },
+            ],
+            generationConfig: {
+              temperature: 0.7,
+              topK: 40,
+              topP: 0.95,
+              maxOutputTokens: 150,
+            },
+          }),
+        }
+      );
+
+      const data = await response.json();
+      return data.candidates[0].content.parts[0].text;
+    } catch (error) {
+      console.error("Error generating response:", error);
+      return "Sorry, I couldn't process that request right now. Please try again later! 🙏";
+    }
+  };
+
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (input.trim() === "") return;
@@ -50,27 +97,31 @@ export function Chatbot() {
     setInput("");
     setIsTyping(true);
     
-    // Simulate bot response
-    setTimeout(() => {
-      const responses = [
-        "That's a great question about Tech Tribe! We're a community of 800+ members focused on tech education and collaboration.",
-        "We host regular workshops, hackathons, and networking events at K.R. MANGALAM University, Gurugram.",
-        "You can join our WhatsApp community by clicking the 'Join Community' button on our website.",
-        "Tech Tribe was founded in 2024 by Swastik Mishra to create a supportive environment for tech enthusiasts.",
-        "Our next event is coming soon! Check out the Events section on our website for more details.",
-        "Feel free to ask anything else about Tech Tribe!"
-      ];
+    // Generate response using Gemini API
+    try {
+      const response = await generateChatResponse(input);
       
       const botMessage: Message = {
         id: Date.now().toString(),
         sender: "bot",
-        text: responses[Math.floor(Math.random() * responses.length)],
+        text: response,
         timestamp: new Date(),
       };
       
       setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error("Error generating response:", error);
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        sender: "bot",
+        text: "Sorry, I'm having trouble responding right now. Please try again later! 🙏",
+        timestamp: new Date(),
+      };
+      
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1000);
+    }
   };
 
   return (
