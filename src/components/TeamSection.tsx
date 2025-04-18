@@ -5,19 +5,20 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useEffect, useRef } from "react";
 
 const founder = {
   name: "Swastik Mishra",
   role: "Founder & Vision Lead",
-  image: "/lovable-uploads/21ef0c51-1eeb-42ba-8098-a0318aa2c3b7.png",
+  image: "/lovable-uploads/b217c549-11e1-461c-a3c8-e221e832ff5f.png",
   bio: "Leading Tech Tribe's mission to empower the next generation of tech innovators at K.R. MANGALAM University.",
   social: {
     twitter: "https://twitter.com/example",
     linkedin: "https://linkedin.com/in/example",
-    github: "https://github.com/example"
+    github: "https://github.com/example",
+    whatsapp: "https://chat.whatsapp.com/I6YpsX5z3GP6oKlGGw26ka"
   }
 };
 
@@ -85,6 +86,19 @@ const coreTeam = [
 ];
 
 export function TeamSection() {
+  const plugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false })
+  );
+
+  useEffect(() => {
+    // Clean up autoplay on unmount
+    return () => {
+      if (plugin.current) {
+        plugin.current.stop();
+      }
+    };
+  }, []);
+
   return (
     <section id="team" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,7 +114,7 @@ export function TeamSection() {
                 <img
                   src={founder.image}
                   alt={founder.name}
-                  className="relative rounded-lg w-full aspect-square object-cover shadow-xl"
+                  className="relative rounded-lg w-full max-w-md mx-auto aspect-square object-cover shadow-xl"
                 />
               </div>
             </div>
@@ -116,6 +130,7 @@ export function TeamSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-techtribe-red transition-colors"
+                  aria-label="Twitter Profile"
                 >
                   <Twitter size={24} />
                 </a>
@@ -124,6 +139,7 @@ export function TeamSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-techtribe-red transition-colors"
+                  aria-label="LinkedIn Profile"
                 >
                   <Linkedin size={24} />
                 </a>
@@ -132,6 +148,7 @@ export function TeamSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-techtribe-red transition-colors"
+                  aria-label="GitHub Profile"
                 >
                   <Github size={24} />
                 </a>
@@ -150,11 +167,12 @@ export function TeamSection() {
               align: "start",
               loop: true,
             }}
+            plugins={[plugin.current]}
             className="w-full max-w-7xl mx-auto"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {coreTeam.map((member, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                   <Card className="border-none shadow-lg overflow-hidden group">
                     <div className="relative overflow-hidden">
                       <img
@@ -172,8 +190,6 @@ export function TeamSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
           </Carousel>
         </div>
       </div>
