@@ -24,14 +24,14 @@ const founder = {
 
 const coreTeam = [
   {
-    name: "Aarav Kumar",
-    role: "Technical Lead",
-    image: "/lovable-uploads/b217c549-11e1-461c-a3c8-e221e832ff5f.png",
+    name: "Archit Srivastava",
+    role: "",
+    image: "public/Core Team full/FINAL/ARCHIT.png",
   },
   {
-    name: "Priya Singh",
-    role: "Community Manager",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&auto=format",
+    name: "Chanchal Yadav",
+    role: "",
+    image: "public/Core Team full/FINAL/CHANCHAL.png",
   },
   {
     name: "Arjun Patel",
