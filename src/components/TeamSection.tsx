@@ -26,7 +26,7 @@ const coreTeam = [
   {
     name: "Archit Srivastava",
     role: "",
-    image: "public/Core Team full/Archit Srivastava.jpg",
+    image: "public/Core Team full/FINAL/ARCHIT.png",
   },
   {
     name: "Chanchal Yadav",
@@ -34,29 +34,29 @@ const coreTeam = [
     image: "public/Core Team full/FINAL/CHANCHAL.png",
   },
   {
-    name: "Arjun Patel",
-    role: "Events Coordinator",
-    image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop&auto=format",
+    name: "Bulbul",
+    role: " ",
+    image: "public/Core Team full/FINAL/BULBUL.png",
   },
   {
-    name: "Zara Khan",
-    role: "Design Lead",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&auto=format",
+    name: "Priyanshi",
+    role: "",
+    image: "public/Core Team full/FINAL/PRIYANSHI.png",
   },
   {
-    name: "Rohan Mehta",
-    role: "Development Head",
-    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop&auto=format",
+    name: "Suhani",
+    role: "",
+    image: "public/Core Team full/FINAL/SUHANI.png",
   },
   {
-    name: "Ananya Sharma",
-    role: "Marketing Lead",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&auto=format",
+    name: "Vanshika",
+    role: "",
+    image: "public/Core Team full/FINAL/VANSHIKA.png",
   },
   {
-    name: "Vikram Singh",
-    role: "Content Strategist",
-    image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop&auto=format",
+    name: "Yash",
+    role: "",
+    image: "public/Core Team full/FINAL/YASH.png",
   },
   {
     name: "Neha Gupta",
