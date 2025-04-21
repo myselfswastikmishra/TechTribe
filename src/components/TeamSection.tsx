@@ -1,198 +1,149 @@
-
 import { Card, CardContent } from "@/components/ui/card";
-import { Github, Linkedin, Twitter } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { useEffect, useRef } from "react";
+import { founders, coreMembers } from "@/constants/siteData";
+import { LinkedinIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const founder = {
-  name: "Swastik Mishra",
-  role: "Founder & Vision Lead",
-  image: "/lovable-uploads/b217c549-11e1-461c-a3c8-e221e832ff5f.png",
-  bio: "Leading Tech Tribe's mission to empower the next generation of tech innovators at K.R. MANGALAM University.",
-  social: {
-    twitter: "https://twitter.com/example",
-    linkedin: "https://linkedin.com/in/example",
-    github: "https://github.com/example",
-    whatsapp: "https://chat.whatsapp.com/I6YpsX5z3GP6oKlGGw26ka"
-  }
-};
-
-const coreTeam = [
-  {
-    name: "Archit Srivastava",
-    role: "",
-    image: "public/Core Team full/FINAL/ARCHIT.png",
-  },
-  {
-    name: "Chanchal Yadav",
-    role: "",
-    image: "public/Core Team full/FINAL/CHANCHAL.png",
-  },
-  {
-    name: "Bulbul",
-    role: " ",
-    image: "public/Core Team full/FINAL/BULBUL.png",
-  },
-  {
-    name: "Priyanshi",
-    role: "",
-    image: "public/Core Team full/FINAL/PRIYANSHI.png",
-  },
-  {
-    name: "Suhani",
-    role: "",
-    image: "public/Core Team full/FINAL/SUHANI.png",
-  },
-  {
-    name: "Vanshika",
-    role: "",
-    image: "public/Core Team full/FINAL/VANSHIKA.png",
-  },
-  {
-    name: "Yash",
-    role: "",
-    image: "public/Core Team full/FINAL/YASH.png",
-  },
-  {
-    name: "Neha Gupta",
-    role: "Operations Head",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&auto=format",
-  },
-  {
-    name: "Aditya Shah",
-    role: "Innovation Lead",
-    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop&auto=format",
-  },
-  {
-    name: "Maya Reddy",
-    role: "Outreach Coordinator",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&auto=format",
-  },
-  {
-    name: "Kabir Malhotra",
-    role: "Research Head",
-    image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop&auto=format",
-  },
-  {
-    name: "Riya Kapoor",
-    role: "Student Relations",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&auto=format",
-  }
-];
-
-export function TeamSection() {
-  const plugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: false })
-  );
-
-  useEffect(() => {
-    // Clean up autoplay on unmount
-    return () => {
-      if (plugin.current) {
-        plugin.current.stop();
-      }
-    };
-  }, []);
-
+const TeamSection = () => {
   return (
-    <section id="team" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Founder Section */}
-        <div className="mb-24">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Our <span className="text-techtribe-red">Leadership</span>
-          </h2>
-          <div className="flex flex-col lg:flex-row items-center gap-12 max-w-6xl mx-auto">
-            <div className="lg:w-1/2">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-techtribe-red/10 rounded-lg transform rotate-3"></div>
+    <section className="py-16 bg-muted/30">
+      <div className="container px-4 md:px-6">
+        <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-tech-purple via-tech-blue to-tech-purple bg-clip-text text-transparent">
+        ꜰᴏᴜɴᴅᴇʀꜱ
+        </h2>
+        
+        {/* Founder and Co-Founders */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <Card className="col-span-full md:col-span-1 group transition-all duration-500 hover:shadow-lg hover:bg-tech-purple/10">
+            <CardContent className="p-6 text-center">
+              <div className="relative overflow-hidden rounded-full mx-auto mb-4 w-32 h-32">
                 <img
-                  src={founder.image}
-                  alt={founder.name}
-                  className="relative rounded-lg w-full max-w-md mx-auto aspect-square object-cover shadow-xl"
+                  src={founders.founder.image}
+                  alt={founders.founder.name}
+                  className="w-32 h-32 rounded-full mx-auto object-cover transition-all duration-500 group-hover:scale-105"
                 />
               </div>
-            </div>
-            <div className="lg:w-1/2 text-center lg:text-left">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">{founder.name}</h3>
-              <p className="text-xl text-techtribe-red mb-4">{founder.role}</p>
-              <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">
-                {founder.bio}
-              </p>
-              <div className="flex justify-center lg:justify-start space-x-4">
-                <a
-                  href={founder.social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-techtribe-red transition-colors"
-                  aria-label="Twitter Profile"
-                >
-                  <Twitter size={24} />
-                </a>
-                <a
-                  href={founder.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-techtribe-red transition-colors"
-                  aria-label="LinkedIn Profile"
-                >
-                  <Linkedin size={24} />
-                </a>
-                <a
-                  href={founder.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-techtribe-red transition-colors"
-                  aria-label="GitHub Profile"
-                >
-                  <Github size={24} />
-                </a>
-              </div>
-            </div>
-          </div>
+              <h3 className="font-bold text-xl mb-1 transition-colors duration-500 group-hover:text-tech-purple">{founders.founder.name}</h3>
+              <p className="text-muted-foreground mb-3 transition-colors duration-500 group-hover:text-tech-blue">{founders.founder.role}</p>
+              <Link to={founders.founder.linkedin} className="text-tech-purple hover:text-tech-purple-dark transition-colors duration-300">
+                <LinkedinIcon className="inline-block w-5 h-5" />
+              </Link>
+            </CardContent>
+          </Card>
+          
+          {founders.coFounders.map((cofounder) => (
+            <Card key={cofounder.name} className="group transition-all duration-500 hover:shadow-lg hover:bg-tech-purple/10">
+              <CardContent className="p-6 text-center">
+                <div className="relative overflow-hidden rounded-full mx-auto mb-4 w-32 h-32">
+                  <img
+                    src={cofounder.image}
+                    alt={cofounder.name}
+                    className="w-32 h-32 rounded-full mx-auto object-cover transition-all duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <h3 className="font-bold text-xl mb-1 transition-colors duration-500 group-hover:text-tech-purple">{cofounder.name}</h3>
+                <p className="text-muted-foreground mb-3 transition-colors duration-500 group-hover:text-tech-blue">{cofounder.role}</p>
+                <Link to={cofounder.linkedin} className="text-tech-purple hover:text-tech-purple-dark transition-colors duration-300">
+                  <LinkedinIcon className="inline-block w-5 h-5" />
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
-        {/* Core Team Section */}
-        <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Our <span className="text-techtribe-red">Core Team</span>
-          </h2>
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            plugins={[plugin.current]}
-            className="w-full max-w-7xl mx-auto"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {coreTeam.map((member, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                  <Card className="border-none shadow-lg overflow-hidden group">
-                    <div className="relative overflow-hidden">
+        {/* Core Members */}
+        <h3 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-tech-purple via-tech-blue to-tech-purple bg-clip-text text-transparent">
+        ᴄᴏʀᴇ ᴍᴇᴍʙᴇʀꜱ
+        </h3>
+        <div className="scroll-container">
+          <div className="scroll-track">
+            {/* First set of members */}
+            {coreMembers.map((member, index) => (
+              <div 
+                key={`first-${member.name}-${index}`} 
+                className="w-[300px] flex-shrink-0 px-3"
+              >
+                <Card className="group transition-all duration-500 hover:shadow-lg hover:bg-tech-purple/10">
+                  <CardContent className="p-5 text-center">
+                    <div className="relative overflow-hidden rounded-full mx-auto mb-3 w-28 h-28">
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-28 h-28 rounded-full mx-auto object-cover transition-all duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
-                    <CardContent className="text-center pt-4 pb-6">
-                      <h3 className="font-bold text-lg">{member.name}</h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{member.role}</p>
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+                    <h4 className="font-semibold text-lg mb-1.5 transition-colors duration-500 group-hover:text-tech-purple">{member.name}</h4>
+                    <p className="text-sm text-muted-foreground transition-colors duration-500 group-hover:text-tech-blue">{member.role}</p>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {coreMembers.map((member, index) => (
+              <div 
+                key={`second-${member.name}-${index}`} 
+                className="w-[300px] flex-shrink-0 px-3"
+              >
+                <Card className="group transition-all duration-500 hover:shadow-lg hover:bg-tech-purple/10">
+                  <CardContent className="p-5 text-center">
+                    <div className="relative overflow-hidden rounded-full mx-auto mb-3 w-28 h-28">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-28 h-28 rounded-full mx-auto object-cover transition-all duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <h4 className="font-semibold text-lg mb-1.5 transition-colors duration-500 group-hover:text-tech-purple">{member.name}</h4>
+                    <p className="text-sm text-muted-foreground transition-colors duration-500 group-hover:text-tech-blue">{member.role}</p>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default TeamSection;
+// Example data to add
+const newFounder = {
+  name: "Swastik Mishra",
+  role: "Founder & Technical Lead",
+  image: "/lovable-uploads/SWASTIK.png",
+  linkedin: "https://linkedin.com/in/myselfswastikmishra/",
+};
+
+const newCoFounders = [
+  {
+    name: "Utsav Ratan",
+    role: "Co-Founder & Technical Lead",
+    image: "/lovable-uploads/utsav.jpeg",
+    linkedin: "https://linkedin.com/in/misterutsav/",
+  },
+  {
+    name: "Mrinal Prakash",
+    role: "Co-Founder & Community Lead",
+    image: "/lovable-uploads/founder3.jpeg",
+    linkedin: "https://linkedin.com/in/mrinal-prakash-a5482b339/",
+  },
+];
+
+const newCoreMembers = [
+    { name: "ᴠᴀɴꜱʜɪᴋᴀ ᴅɪxɪᴛ 🎀", role: "", image: "/lovable-uploads/VANSHIKA.png" },
+    { name: "ꜱᴜʜᴀɴɪ", role: "", image: "/lovable-uploads/SUHANI.png" },
+    { name: "ʙᴜʟʙᴜʟ ꜱɪɴɢʜ ᴄʜᴀᴜʜᴀɴ", role: "", image: "/lovable-uploads/BULBUL.png" },
+    { name: "ᴄʜᴀɴᴄʜᴀʟ ʏᴀᴅᴀᴠ", role: "", image: "/lovable-uploads/CHANCHAL.png" },
+    { name: "ᴘʀɪʏᴀɴꜱʜɪ ᴘᴀᴛᴇʟ", role: "", image: "/lovable-uploads/PRIYANSHI.png" },
+    { name: "ᴀʀᴄʜɪᴛ ꜱʀɪᴠᴀꜱᴛᴀᴠᴀ", role: "", image: "/lovable-uploads/ARCHIT.png" },
+    { name: "ʜɪʏᴀɴꜱʜ ꜱʜᴀʀᴍᴀ", role: "", image: "/lovable-uploads/hiyansh.png" },
+    { name: "ʏᴀꜱʜᴘᴀʟ", role: "", image: "/lovable-uploads/YASH.png" },
+    { name: "ᴀᴅɪᴛʏᴀ ᴋᴜᴍᴀʀ ꜱɪɴɢʜ", role: "", image: "/lovable-uploads/core9.png" },
+    {name: "ᴋʀᴀᴛɪᴋᴀ ᴛᴏᴍᴀʀ", role: "", image: "/lovable-uploads/core8.1-2.jpg" },
+    { name: "ᴋʜᴜꜱʙᴏᴏ", role: "", image: "/lovable-uploads/core5.jpg" },
+    { name: "ᴀɴꜱʜɪᴋᴀ ᴛʀɪᴋʜᴀ", role: "", image: "/lovable-uploads/core4.jpg" },
+  ];
+// Adding the new data to the existing constants
+founders.founder = newFounder;
+founders.coFounders.push(...newCoFounders);
+coreMembers.push(...newCoreMembers);
