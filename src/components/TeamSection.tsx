@@ -26,7 +26,7 @@ const coreTeam = [
   {
     name: "Archit Srivastava",
     role: "",
-    image: "public/Core Team full/FINAL/ARCHIT.png",
+    image: "public/Core Team full/Archit Srivastava.jpg",
   },
   {
     name: "Chanchal Yadav",
