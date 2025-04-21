@@ -26,7 +26,7 @@ const coreTeam = [
   {
     name: "Aarav Kumar",
     role: "Technical Lead",
-    image: "",
+    image: "/lovable-uploads/b217c549-11e1-461c-a3c8-e221e832ff5f.png",
   },
   {
     name: "Priya Singh",
